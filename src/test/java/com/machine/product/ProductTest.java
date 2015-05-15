@@ -9,6 +9,12 @@ import org.junit.Test;
 
 import com.machine.entity.Product;
 
+/**
+ * Product entity test
+ * 
+ * @author mujahedsyed
+ *
+ */
 public class ProductTest {
 
 	Product p = Product.A;

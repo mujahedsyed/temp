@@ -2,6 +2,7 @@ package com.machine;
 
 import java.math.BigDecimal;
 
+import com.machine.entity.Coin;
 import com.machine.entity.Product;
 import com.machine.products.Products;
 import com.machine.states.IdleAndSwitchedOnState;
@@ -77,6 +78,7 @@ public class VendingMachine {
 
 	/**
 	 * how many coins were inserted in total
+	 * 
 	 * @return
 	 */
 	public BigDecimal getInsertedMoneyValue() {
@@ -88,15 +90,15 @@ public class VendingMachine {
 	}
 
 	public void putCoins(BigDecimal coins) {
-		if (isValidCoin()) {
+		if (isValidCoin(coins)) {
 			this.coins = this.coins.add(coins);
 		} else
 			ejectCoins();
 	}
 
-	private boolean isValidCoin() {
-		// TODO
-		return false;
+	private boolean isValidCoin(BigDecimal coins) {
+		// TODO: Determine if the coin is valid
+		return true;
 	}
 
 	public void ejectCoins() {

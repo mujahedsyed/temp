@@ -8,6 +8,13 @@ import org.junit.Test;
 
 import com.machine.entity.Product;
 
+/**
+ * Testing vending machine; complete vending machine test states are broken into
+ * respective state classes.
+ * 
+ * @author mujahedsyed
+ *
+ */
 public class VendingMachineTests {
 
 	VendingMachine machine = new VendingMachine();

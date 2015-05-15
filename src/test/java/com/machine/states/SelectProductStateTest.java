@@ -11,6 +11,11 @@ import com.machine.VendingMachine;
 import com.machine.entity.Coin;
 import com.machine.entity.Product;
 
+/**
+ * 
+ * @author mujahedsyed
+ *
+ */
 public class SelectProductStateTest {
 
 	VendingMachine machine = new VendingMachine();

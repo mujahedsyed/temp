@@ -10,6 +10,13 @@ import org.junit.Test;
 import com.machine.entity.Product;
 import com.machine.products.Products;
 
+/**
+ * This class tests basic functionality provided by Products like remove the
+ * product, put the product and get current stock
+ * 
+ * @author mujahedsyed
+ *
+ */
 public class ProductsTest {
 
 	Products p1 = Products.getSingeltonInstance();

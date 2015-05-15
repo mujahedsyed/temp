@@ -11,6 +11,15 @@ import com.machine.VendingMachine;
 import com.machine.entity.Coin;
 import com.machine.entity.Product;
 
+/**
+ * This class tests the insert coin and dispense product state for the machine.
+ * 
+ * Note: machine will remember the choosen product if it is in the middle of
+ * taking coins.
+ * 
+ * @author mujahedsyed
+ *
+ */
 public class InsertCoinsAndDispenseProductStateTests {
 
 	VendingMachine machine = new VendingMachine();
