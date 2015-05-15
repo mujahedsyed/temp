@@ -2,6 +2,7 @@ package com.machine.states;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.machine.VendingMachine;
 import com.machine.entity.Coin;
@@ -9,6 +10,9 @@ import com.machine.entity.Product;
 import com.machine.util.Utility;
 
 public class InsertCoinsAndDispenseProductState implements State {
+
+	private final static Logger LOGGER = Logger
+			.getLogger(InsertCoinsAndDispenseProductState.class.getName());
 
 	private VendingMachine machine;
 
@@ -38,10 +42,8 @@ public class InsertCoinsAndDispenseProductState implements State {
 		int comareResult = sumOfCoins.compareTo(selectedProductValue);
 
 		if (comareResult == -1) {
-			System.out
-					.println("WARN more coins needed to dispense the product; please put remaning "
-							+ (selectedProductValue.subtract(sumOfCoins))
-							+ " amount");
+			LOGGER.warning("WARN more coins needed to dispense the product; please put remaning "
+					+ (selectedProductValue.subtract(sumOfCoins)) + " amount");
 			return false;
 		} else if (comareResult == 1) {
 			dispense();
@@ -56,14 +58,14 @@ public class InsertCoinsAndDispenseProductState implements State {
 
 	@Override
 	public Product dispense() {
-		System.out.println("here is your selection :"
+		LOGGER.warning("here is your selection :"
 				+ this.machine.getProduct().getDescription());
 		return this.machine.getProduct();
 	}
 
 	@Override
 	public BigDecimal ejectCoins(BigDecimal amount) {
-		System.out.println("Returning " + amount);
+		LOGGER.warning("Returning " + amount);
 		this.machine.setState(new IdleAndSwitchedOnState(machine));
 		return machine.getCoins();
 	}

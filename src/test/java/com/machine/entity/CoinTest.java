@@ -1,12 +1,10 @@
 package com.machine.entity;
 
+
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.Locale;
+import java.util.logging.Logger;
 
 import org.junit.Test;
 
@@ -20,6 +18,9 @@ import com.machine.entity.Coin;
  */
 public class CoinTest {
 
+	private final static Logger LOGGER = Logger.getLogger(CoinTest.class
+			.getName());
+	
 	Coin coin = Coin.TenPence;
 
 	/**
@@ -29,6 +30,7 @@ public class CoinTest {
 	public void testCoin() {
 		assertNotNull(coin);
 		assertTrue(coin instanceof Coin);
+		LOGGER.info("CoinTest passed :: testCoin()");
 	}
 
 	/**
@@ -36,8 +38,8 @@ public class CoinTest {
 	 */
 	@Test
 	public void testGetValue() {
-
 		assertEquals(new BigDecimal("0.10"), Coin.TenPence.getValue());
+		LOGGER.info("CoinTest passed :: testGetValue()");
 	}
 
 	/**
@@ -59,5 +61,6 @@ public class CoinTest {
 	@Test
 	public void testPutValidCoin() throws CoinNotAllowedException {
 		Coin.getEnum("0.10");
+		LOGGER.info("CoinTest passed :: testPutValidCoin()");
 	}
 }

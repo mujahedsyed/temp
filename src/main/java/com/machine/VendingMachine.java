@@ -1,8 +1,8 @@
 package com.machine;
 
 import java.math.BigDecimal;
+import java.util.logging.Logger;
 
-import com.machine.entity.Coin;
 import com.machine.entity.Product;
 import com.machine.products.Products;
 import com.machine.states.IdleAndSwitchedOnState;
@@ -17,6 +17,9 @@ import com.machine.states.State;
  *
  */
 public class VendingMachine {
+
+	private final static Logger LOGGER = Logger.getLogger(VendingMachine.class
+			.getName());
 
 	// Machine has a state
 	private State state;

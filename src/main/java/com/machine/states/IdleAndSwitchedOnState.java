@@ -2,12 +2,16 @@ package com.machine.states;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.machine.VendingMachine;
 import com.machine.entity.Coin;
 import com.machine.entity.Product;
 
 public class IdleAndSwitchedOnState implements State {
+
+	private final static Logger LOGGER = Logger
+			.getLogger(IdleAndSwitchedOnState.class.getName());
 
 	private VendingMachine machine;
 
@@ -27,7 +31,7 @@ public class IdleAndSwitchedOnState implements State {
 
 	@Override
 	public Product selectProduct(Product product) {
-		System.out.println("Select product ...");
+		LOGGER.warning("Select product ...");
 		return product;
 	}
 

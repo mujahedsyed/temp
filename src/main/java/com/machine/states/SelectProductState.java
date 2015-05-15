@@ -2,6 +2,7 @@ package com.machine.states;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.machine.VendingMachine;
 import com.machine.entity.Coin;
@@ -17,6 +18,9 @@ import com.machine.util.Utility;
  *
  */
 public class SelectProductState implements State {
+
+	private final static Logger LOGGER = Logger
+			.getLogger(SelectProductState.class.getName());
 
 	private VendingMachine machine;
 
@@ -36,7 +40,7 @@ public class SelectProductState implements State {
 
 	@Override
 	public Product selectProduct(Product product) {
-		System.out.println("Selected product is " + product.getDescription());
+		LOGGER.info("Selected product is " + product.getDescription());
 		this.machine.setProduct(product);
 		this.machine.setState(new InsertCoinsAndDispenseProductState(machine));
 		return product;
@@ -44,8 +48,7 @@ public class SelectProductState implements State {
 
 	@Override
 	public boolean enterAmountForSelectedProduct(List<Coin> coins) {
-		System.out
-				.println("Choose your selection first .. returning your money");
+		LOGGER.warning("Choose your selection first .. returning your money");
 		ejectCoins(Utility.sum(coins));
 		return false;
 	}
