@@ -2,6 +2,8 @@ package com.machine.entity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * valid input coins 0.10, 0.20, 0.50, 1.00
@@ -11,26 +13,31 @@ import java.math.RoundingMode;
  */
 public enum Coin {
 
-	TenPence(new BigDecimal(0.10).setScale(2, RoundingMode.HALF_UP), "0.10"), TwentyPence(
-			new BigDecimal(0.20).setScale(2, RoundingMode.HALF_UP), "0.20"), FiftyPence(
-			new BigDecimal(0.50).setScale(2, RoundingMode.HALF_UP), "0.50"), OnePound(
-			new BigDecimal(1.00).setScale(2, RoundingMode.HALF_UP), "1.00"), InvalidCoin(
-			new BigDecimal(0.00), "0.00");
+	TenPence(new BigDecimal(0.10)), TwentyPence(new BigDecimal(0.20)), FiftyPence(
+			new BigDecimal(0.50)), OnePound(new BigDecimal(1.00)), ;
 
-	Coin(BigDecimal value, String description) {
-		this.description = description;
-		this.price = value;
+	Coin(BigDecimal value) {
+		this.value = value;
 	}
 
-	private String description;
-	private BigDecimal price;
+	private BigDecimal value;
 
-	public String getDescription() {
-		return description;
+	public BigDecimal getValue() {
+		this.value = this.value.setScale(2, RoundingMode.HALF_EVEN);
+		return value;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
+	public String getCoinInLocalFormat() {
+		NumberFormat gbpCostFormat = getCurrentCostFormat();
+		return gbpCostFormat.format(value.doubleValue());
 	}
 
+	private static NumberFormat getCurrentCostFormat() {
+
+		NumberFormat gbpCostFormat = NumberFormat
+				.getCurrencyInstance(Locale.UK);
+		gbpCostFormat.setMinimumFractionDigits(2);
+		gbpCostFormat.setMaximumFractionDigits(2);
+		return gbpCostFormat;
+	}
 }

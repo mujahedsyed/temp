@@ -9,7 +9,7 @@ public class Utility {
 	public static BigDecimal sum(List<Coin> coins) {
 		BigDecimal sum = new BigDecimal(0.00);
 		for (Coin c : coins) {
-			sum = sum.add(c.getPrice());
+			sum = sum.add(c.getValue());
 		}
 		return sum;
 	}

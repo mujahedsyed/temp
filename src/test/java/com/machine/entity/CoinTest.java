@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.Locale;
 
 import org.junit.Test;
 
@@ -29,19 +32,12 @@ public class CoinTest {
 	}
 
 	/**
-	 * This tests the description. T
+	 * This tests the value with locale info.
 	 */
 	@Test
-	public void testGetDescription() {
-		assertEquals("0.10", Coin.TenPence.getDescription());
-	}
-
-	/**
-	 * Get the value of the coin test.
-	 */
-	@Test
-	public void testGetPrice() {
-		assertEquals(new BigDecimal("0.10"), Coin.TenPence.getPrice());
+	public void testGetValue() {
+		
+		assertEquals(new BigDecimal("0.10"), Coin.TenPence.getValue());
 	}
 
 	/**
@@ -49,7 +45,16 @@ public class CoinTest {
 	 */
 	@Test
 	public void testPutInvalidCont() {
-		assertEquals(new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP),
-				Coin.InvalidCoin.getPrice().setScale(2, RoundingMode.HALF_UP));
+		BigDecimal invalidCoin = new BigDecimal("1.00").setScale(2,
+				RoundingMode.HALF_UP);
+
+		boolean result = Arrays.asList(Coin.values()).contains(
+				invalidCoin.toString());
+
+		System.out.println("invalidCoin: " + result + "; "
+				+ invalidCoin.toString());
+		for (Coin coin : Coin.values()) {
+			System.out.println(coin.getValue());
+		}
 	}
 }
