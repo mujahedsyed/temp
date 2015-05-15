@@ -36,25 +36,28 @@ public class CoinTest {
 	 */
 	@Test
 	public void testGetValue() {
-		
+
 		assertEquals(new BigDecimal("0.10"), Coin.TenPence.getValue());
 	}
 
 	/**
-	 * an invalid coin is treated as having no value at all.
+	 * an invalid coin is treated as having no value at all. From the vending
+	 * machine it will be ejected.
+	 * 
+	 * @throws CoinNotAllowedException
+	 */
+	@Test(expected = CoinNotAllowedException.class)
+	public void testPutInvalidCoin() throws CoinNotAllowedException {
+		Coin.getEnum("2.00");
+	}
+
+	/**
+	 * a valid coin test.
+	 * 
+	 * @throws CoinNotAllowedException
 	 */
 	@Test
-	public void testPutInvalidCont() {
-		BigDecimal invalidCoin = new BigDecimal("1.00").setScale(2,
-				RoundingMode.HALF_UP);
-
-		boolean result = Arrays.asList(Coin.values()).contains(
-				invalidCoin.toString());
-
-		System.out.println("invalidCoin: " + result + "; "
-				+ invalidCoin.toString());
-		for (Coin coin : Coin.values()) {
-			System.out.println(coin.getValue());
-		}
+	public void testPutValidCoin() throws CoinNotAllowedException {
+		Coin.getEnum("0.10");
 	}
 }
