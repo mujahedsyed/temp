@@ -1,4 +1,4 @@
-package com.machin.entity;
+package com.machine.entity;
 
 import static org.junit.Assert.*;
 

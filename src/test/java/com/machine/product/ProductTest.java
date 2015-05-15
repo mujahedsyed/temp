@@ -1,4 +1,4 @@
-package com.machin.product;
+package com.machine.product;
 
 import static org.junit.Assert.*;
 
