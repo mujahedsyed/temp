@@ -51,11 +51,15 @@ public class InitialState implements State {
 		this.machine.setState(new SwitchedOffState(machine));
 	}
 
+	// machine already switched on
 	@Override
 	public void switchedOn() throws InvalidUserActionException {
 		throw new InvalidUserActionException("Machine is already switched on!");
 	}
 
+	/**
+	 * select the product and set the state to request for the money.
+	 */
 	@Override
 	public Product selectProduct() throws InvalidUserActionException {
 		this.machine.setProduct(this.machine.getProduct());
@@ -63,6 +67,9 @@ public class InitialState implements State {
 		return this.machine.getProduct();
 	}
 
+	/**
+	 * to cancel a selection there has to be selection first.
+	 */
 	@Override
 	public void cancelSelection() throws InvalidUserActionException {
 		throw new InvalidUserActionException("Product is not selected!");

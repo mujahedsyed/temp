@@ -1,10 +1,16 @@
-package com.machine.products;
+package com.machine.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.machine.entity.Product;
 
+/**
+ * Product inventory util class.
+ * 
+ * @author mujahedsyed
+ *
+ */
 public class Products {
 
 	private Products() {

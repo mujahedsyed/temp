@@ -5,11 +5,12 @@ import java.util.logging.Logger;
 
 import com.machine.entity.Coin;
 import com.machine.entity.Product;
-import com.machine.products.Products;
+import com.machine.inventory.Products;
 import com.machine.states.InitialState;
 import com.machine.states.InsertCoinsState;
 import com.machine.states.InvalidUserActionException;
 import com.machine.states.State;
+import com.machine.states.SwitchedOffState;
 
 /**
  * Vending Machine class, the class has State, May have Coins and Products.
@@ -19,6 +20,7 @@ import com.machine.states.State;
  */
 public class VendingMachine {
 
+	@SuppressWarnings("unused")
 	private final static Logger LOGGER = Logger.getLogger(VendingMachine.class
 			.getName());
 
@@ -35,17 +37,18 @@ public class VendingMachine {
 	/**
 	 * All possible states the machine can have.
 	 */
-	private State idleAndSwitchedOnState;
-	private State selectProductState;
+	private State idleState;
 	private State insertCoinsState;
+	private State switchedOffState;
 
 	/**
 	 * Default constructor intialized with switched on and waiting to serve
 	 * state.
 	 */
 	public VendingMachine() {
-		this.idleAndSwitchedOnState = new InitialState(this);
+		this.idleState = new InitialState(this);
 		this.insertCoinsState = new InsertCoinsState(this);
+		this.switchedOffState = new SwitchedOffState(this);
 		this.products = Products.getSingeltonInstance();
 	}
 
@@ -93,6 +96,30 @@ public class VendingMachine {
 
 	public void setCoins(List<Coin> coins) {
 		this.coins = coins;
+	}
+
+	public State getIdleState() {
+		return idleState;
+	}
+
+	public void setIdleState(State idleState) {
+		this.idleState = idleState;
+	}
+
+	public State getInsertCoinsState() {
+		return insertCoinsState;
+	}
+
+	public void setInsertCoinsState(State insertCoinsState) {
+		this.insertCoinsState = insertCoinsState;
+	}
+
+	public State getSwitchedOffState() {
+		return switchedOffState;
+	}
+
+	public void setSwitchedOffState(State switchedOffState) {
+		this.switchedOffState = switchedOffState;
 	}
 
 	@Override

@@ -9,9 +9,35 @@ import com.machine.VendingMachine;
 import com.machine.entity.Coin;
 import com.machine.entity.CoinNotAllowedException;
 import com.machine.entity.Product;
-import com.machine.products.Products;
+import com.machine.inventory.Products;
 import com.machine.util.Utility;
 
+/**
+ * The machine moves from initial state to insert coin state when a user selects
+ * a product.
+ * 
+ * <p>
+ * Possible machine actions associated in this state are:
+ * 
+ * <ul>
+ * 
+ * <li>Switching off the machine turns it off. State of the machine is changed
+ * from InsertCoinState to SwitchOffState</li>
+ * 
+ * <li>User will not be able to switch on the machine, as it is already switched
+ * on. If this request is made than a InvalidUserActionException exception is
+ * thrown.</li>
+ * 
+ * <li>Selecting a product is also not possible unless user cancels the
+ * previously selected product.</li>
+ * 
+ * <li>enterAmountForSelectedProduct method takes the coins inserted and based
+ * on the amount inserted it moves the machine in respective states i.e. if less
+ * money is inserted machine requests for more money.</li>
+ * 
+ * @author mujahedsyed
+ *
+ */
 public class InsertCoinsState implements State {
 
 	private static final Logger LOGGER = Logger

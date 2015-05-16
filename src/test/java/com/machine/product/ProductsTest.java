@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.machine.entity.Product;
-import com.machine.products.Products;
+import com.machine.inventory.Products;
 
 /**
  * This class tests basic functionality provided by Products like remove the

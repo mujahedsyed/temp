@@ -11,7 +11,6 @@ import org.junit.Test;
 import com.machine.VendingMachine;
 import com.machine.entity.Coin;
 import com.machine.entity.CoinNotAllowedException;
-import com.machine.entity.Product;
 
 public class SwitchedOffStateTest {
 
