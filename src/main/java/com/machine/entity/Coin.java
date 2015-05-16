@@ -67,7 +67,7 @@ public enum Coin {
 		big.setScale(2, RoundingMode.HALF_EVEN);
 
 		for (Coin coin : values()) {
-			if (coin.getValue().equals(big)) {
+			if (coin.getValue().compareTo(big) == 0) {
 				return coin;
 			}
 		}

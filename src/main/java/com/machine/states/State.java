@@ -1,6 +1,5 @@
 package com.machine.states;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.machine.entity.Coin;
@@ -8,15 +7,18 @@ import com.machine.entity.Product;
 
 public interface State {
 
-	boolean switchedOff();
+	void switchedOff() throws InvalidUserActionException;
 
-	boolean switchedOn();
+	void switchedOn() throws InvalidUserActionException;
 
-	Product selectProduct(Product product);
+	Product selectProduct() throws InvalidUserActionException;
 
-	boolean enterAmountForSelectedProduct(List<Coin> coins);
+	void cancelSelection() throws InvalidUserActionException;
 
-	Product dispense();
+	boolean enterAmountForSelectedProduct()
+			throws InvalidUserActionException, InvalidCoinException;
 
-	BigDecimal ejectCoins(BigDecimal amount);
+	Product dispense() throws InvalidUserActionException;
+
+	List<Coin> ejectCoins();
 }

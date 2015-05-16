@@ -1,13 +1,14 @@
 package com.machine;
 
-import java.math.BigDecimal;
+import java.util.List;
 import java.util.logging.Logger;
 
+import com.machine.entity.Coin;
 import com.machine.entity.Product;
 import com.machine.products.Products;
-import com.machine.states.IdleAndSwitchedOnState;
-import com.machine.states.InsertCoinsAndDispenseProductState;
-import com.machine.states.SelectProductState;
+import com.machine.states.InitialState;
+import com.machine.states.InsertCoinsState;
+import com.machine.states.InvalidUserActionException;
 import com.machine.states.State;
 
 /**
@@ -24,29 +25,27 @@ public class VendingMachine {
 	// Machine has a state
 	private State state;
 	// Machine can take or give a coin i.e. Machine HAS-A coin
-	private BigDecimal coins = new BigDecimal(0.00);
 	// Machine can take or give a product i.e. Machine HAS-A product.
 	// Initialized with No product selected.
-	private Product product = Product.NO_PRODUCT_SELECTED;
+	private Product product = null;
+	// inventory of products
 	private Products products;
+	private List<Coin> coins;
 
 	/**
 	 * All possible states the machine can have.
 	 */
 	private State idleAndSwitchedOnState;
 	private State selectProductState;
-	private State insertCoinsAndDispenseProductState;
+	private State insertCoinsState;
 
 	/**
 	 * Default constructor intialized with switched on and waiting to serve
 	 * state.
 	 */
 	public VendingMachine() {
-		this.idleAndSwitchedOnState = new IdleAndSwitchedOnState(this);
-		this.selectProductState = new SelectProductState(this);
-		this.insertCoinsAndDispenseProductState = new InsertCoinsAndDispenseProductState(
-				this);
-
+		this.idleAndSwitchedOnState = new InitialState(this);
+		this.insertCoinsState = new InsertCoinsState(this);
 		this.products = Products.getSingeltonInstance();
 	}
 
@@ -68,51 +67,15 @@ public class VendingMachine {
 		this.state = state;
 	}
 
-	/**
-	 * Take the selection product and ask the user to enter enough coins
-	 * 
-	 * @param coin
-	 * @param product
-	 */
-	public void getInput(BigDecimal coin, Product product) {
-		this.coins = coins.add(coin);
-		this.product = product;
-	}
-
-	/**
-	 * how many coins were inserted in total
-	 * 
-	 * @return
-	 */
-	public BigDecimal getInsertedMoneyValue() {
-		return getCoins();
-	}
-
-	public BigDecimal getCoins() {
-		return coins;
-	}
-
-	public void putCoins(BigDecimal coins) {
-		if (isValidCoin(coins)) {
-			this.coins = this.coins.add(coins);
-		} else
-			ejectCoins();
-	}
-
-	private boolean isValidCoin(BigDecimal coins) {
-		// TODO: Determine if the coin is valid
-		return true;
-	}
-
 	public void ejectCoins() {
-		state.ejectCoins(this.coins);
+		this.state.ejectCoins();
 	}
 
-	public void dispense() {
-		state.dispense();
+	public void dispense() throws InvalidUserActionException {
+		this.state.dispense();
 	}
 
-	public Product getProduct() {
+	public Product getProduct() throws InvalidUserActionException {
 		return product;
 	}
 
@@ -121,6 +84,20 @@ public class VendingMachine {
 	}
 
 	public Products getProducts() {
-		return products;
+		return this.products;
+	}
+
+	public List<Coin> getCoins() {
+		return coins;
+	}
+
+	public void setCoins(List<Coin> coins) {
+		this.coins = coins;
+	}
+
+	@Override
+	public String toString() {
+		return "VendingMachine [state=" + state + ", product=" + product
+				+ ", products=" + products + ", coins=" + coins + "]";
 	}
 }
