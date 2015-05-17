@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import org.junit.Test;
 
 import com.machine.entity.Coin;
+import com.machine.states.InvalidCoinException;
 
 /**
  * Coin Test
@@ -46,20 +47,20 @@ public class CoinTest {
 	 * an invalid coin is treated as having no value at all. From the vending
 	 * machine it will be ejected.
 	 * 
-	 * @throws CoinNotAllowedException
+	 * @throws InvalidCoinException
 	 */
-	@Test(expected = CoinNotAllowedException.class)
-	public void testPutInvalidCoin() throws CoinNotAllowedException {
+	@Test(expected = InvalidCoinException.class)
+	public void testPutInvalidCoin() throws InvalidCoinException {
 		Coin.getEnum("2.00");
 	}
 
 	/**
 	 * a valid coin test.
 	 * 
-	 * @throws CoinNotAllowedException
+	 * @throws InvalidCoinException
 	 */
 	@Test
-	public void testPutValidCoin() throws CoinNotAllowedException {
+	public void testPutValidCoin() throws InvalidCoinException {
 		Coin.getEnum("0.10");
 		LOGGER.info("CoinTest passed :: testPutValidCoin()");
 	}

@@ -15,7 +15,7 @@ import com.machine.states.InsertCoinsState;
  */
 public class VendingMachineTest {
 
-	private VendingMachine machine = new VendingMachine();
+	private Machine machine = new VendingMachine();
 
 	@Test
 	public void testVendingMachine() {

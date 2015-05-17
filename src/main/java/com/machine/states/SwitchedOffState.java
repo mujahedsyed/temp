@@ -3,7 +3,7 @@ package com.machine.states;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.machine.VendingMachine;
+import com.machine.Machine;
 import com.machine.entity.Coin;
 import com.machine.entity.Product;
 
@@ -15,11 +15,11 @@ import com.machine.entity.Product;
  */
 public class SwitchedOffState implements State {
 
-	private VendingMachine machine;
+	private Machine machine;
 	private static final Logger LOGGER = Logger
 			.getLogger(SwitchedOffState.class.getName());
 
-	public SwitchedOffState(VendingMachine machine) {
+	public SwitchedOffState(Machine machine) {
 		this.machine = machine;
 	}
 

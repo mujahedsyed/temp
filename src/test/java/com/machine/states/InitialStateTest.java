@@ -8,14 +8,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.machine.Machine;
 import com.machine.VendingMachine;
 import com.machine.entity.Coin;
-import com.machine.entity.CoinNotAllowedException;
 import com.machine.entity.Product;
 
 public class InitialStateTest {
 
-	private VendingMachine machine = null;
+	private Machine machine = null;
 	private State state = null;
 	private static List<Coin> coins = null;
 
@@ -78,7 +78,7 @@ public class InitialStateTest {
 	}
 
 	@Test
-	public void testEjectCoins() throws CoinNotAllowedException {
+	public void testEjectCoins() throws InvalidCoinException {
 		assertTrue(machine.getState() instanceof InitialState);
 		List<Coin> returnedCoins = state.ejectCoins();
 

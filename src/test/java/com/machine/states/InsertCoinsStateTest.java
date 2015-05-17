@@ -8,13 +8,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.machine.Machine;
 import com.machine.VendingMachine;
 import com.machine.entity.Coin;
 import com.machine.entity.Product;
 
 public class InsertCoinsStateTest {
 
-	private VendingMachine machine = null;
+	private Machine machine = null;
 	private State state = null;
 	private static List<Coin> coins = null;
 

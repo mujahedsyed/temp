@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.machine.VendingMachine;
+import com.machine.Machine;
 import com.machine.entity.Coin;
-import com.machine.entity.CoinNotAllowedException;
 import com.machine.entity.Product;
+import com.machine.inventory.Coins;
 import com.machine.inventory.Products;
 import com.machine.util.Utility;
 
@@ -43,9 +43,9 @@ public class InsertCoinsState implements State {
 	private static final Logger LOGGER = Logger
 			.getLogger(InsertCoinsState.class.getName());
 
-	private VendingMachine machine;
+	private Machine machine;
 
-	public InsertCoinsState(VendingMachine machine) {
+	public InsertCoinsState(Machine machine) {
 		this.machine = machine;
 	}
 
@@ -99,7 +99,7 @@ public class InsertCoinsState implements State {
 			dispense();
 		} else {
 			willDispatch = true;
-			consumeChange(sumOfCoins);
+			updateCoinsInventoryAndReturnChange();
 			dispense();
 			ejectCoins();
 		}
@@ -107,20 +107,25 @@ public class InsertCoinsState implements State {
 		return willDispatch;
 	}
 
-	private void consumeChange(BigDecimal sumOfCoins)
-			throws InvalidUserActionException {
-		BigDecimal currentChangeToReturn = sumOfCoins.subtract(this.machine
-				.getProduct().getPrice());
-		Coin returnCoins = null;
-		try {
-			returnCoins = Coin.getEnum(currentChangeToReturn.toString());
-		} catch (CoinNotAllowedException e) {
-			e.printStackTrace();
-		}
+	// userMoney variable is the total amount of money entered by the user;
+	// change needs to be returned to the user
+	private void updateCoinsInventoryAndReturnChange()
+			throws InvalidCoinException, InvalidUserActionException {
 
-		List<Coin> changeToReturn = new ArrayList<Coin>();
-		changeToReturn.add(returnCoins);
-		this.machine.setCoins(changeToReturn);
+		// first we update the coins inventory than we return the change
+		Coins.getSingeltonInstance()
+				.addCoinCollection(this.machine.getCoins());
+
+		// now lets return the change by setting current coins ejectCoins() will
+		// do the actual return
+		BigDecimal change = Utility.sum(this.machine.getCoins()).subtract(
+				this.machine.getProduct().getPrice());
+		List<Coin> changeList = Coin.calculateChange(change.toString());
+		this.machine.setCoins(changeList);
+
+		// after ejecting the coins; coins inventory has to reduced with the
+		// ejected change
+		Coins.getSingeltonInstance().removeCoinCollection(changeList);
 	}
 
 	@Override

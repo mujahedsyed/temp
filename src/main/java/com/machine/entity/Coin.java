@@ -3,7 +3,12 @@ package com.machine.entity;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.logging.Logger;
+
+import com.machine.states.InvalidCoinException;
 
 /**
  * valid input coins 0.10, 0.20, 0.50, 1.00 This class has getEnum method,
@@ -28,6 +33,7 @@ public enum Coin {
 
 	private BigDecimal value;
 	private Locale locale;
+	private static final Logger LOGGER = Logger.getLogger(Coin.class.getName());
 
 	public BigDecimal getValue() {
 		return value;
@@ -60,9 +66,9 @@ public enum Coin {
 		return getCoinInLocalFormat();
 	}
 
-	// This static method is equivlent of valueOf method, it is provided to
+	// This static method is equivalent of valueOf method, it is provided to
 	// check if current provided coin is a valid coin or not.
-	public static Coin getEnum(String value) throws CoinNotAllowedException {
+	public static Coin getEnum(String value) throws InvalidCoinException {
 		BigDecimal big = new BigDecimal(value);
 		big.setScale(2, RoundingMode.HALF_EVEN);
 
@@ -71,6 +77,38 @@ public enum Coin {
 				return coin;
 			}
 		}
-		throw new CoinNotAllowedException(value);
+		throw new InvalidCoinException(value);
+	}
+
+	public static List<Coin> calculateChange(String value)
+			throws InvalidCoinException {
+		List<Coin> coins = new ArrayList<Coin>();
+		BigDecimal change = new BigDecimal(value);
+		BigDecimal zeroChange = new BigDecimal("0.00");
+
+		while (change.compareTo(zeroChange) > 0) {
+
+			if (change.subtract(Coin.OnePound.getValue()).compareTo(zeroChange) >= 0) {
+				coins.add(OnePound);
+				change = change.subtract(OnePound.getValue());
+			} else if (change.subtract(Coin.FiftyPence.getValue()).compareTo(
+					zeroChange) >= 0) {
+				coins.add(FiftyPence);
+				change = change.subtract(FiftyPence.getValue());
+			} else if (change.subtract(Coin.TwentyPence.getValue()).compareTo(
+					zeroChange) >= 0) {
+				coins.add(TwentyPence);
+				change = change.subtract(TwentyPence.getValue());
+			} else if (change.subtract(Coin.TenPence.getValue()).compareTo(
+					zeroChange) >= 0) {
+				coins.add(TenPence);
+				change = change.subtract(TenPence.getValue());
+			} else {
+				change = change.subtract(change);
+				LOGGER.severe("Unable to give change for " + value
+						+ "; kindly accept : " + coins);
+			}
+		}
+		return coins;
 	}
 }
