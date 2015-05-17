@@ -107,7 +107,7 @@ public class InsertCoinsState implements State {
 		return willDispatch;
 	}
 
-	// userMoney variable is the total amount of money entered by the user;
+	// userMoney variable is the total amount of money entered by the user
 	// change needs to be returned to the user
 	private void updateCoinsInventoryAndReturnChange()
 			throws InvalidCoinException, InvalidUserActionException {

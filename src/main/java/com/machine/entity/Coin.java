@@ -21,9 +21,9 @@ import com.machine.states.InvalidCoinException;
 public enum Coin {
 
 	// creating acceptable coins in Locale format
-	TenPence(new BigDecimal(0.10), Locale.UK), TwentyPence(
-			new BigDecimal(0.20), Locale.UK), FiftyPence(new BigDecimal(0.50),
-			Locale.UK), OnePound(new BigDecimal(1.00), Locale.UK);
+	TenPence(BigDecimal.valueOf(0.10), Locale.UK), TwentyPence(BigDecimal
+			.valueOf(0.20), Locale.UK), FiftyPence(BigDecimal.valueOf(0.50),
+			Locale.UK), OnePound(BigDecimal.valueOf(1.00), Locale.UK);
 
 	Coin(BigDecimal value, Locale locale) {
 		this.value = value;

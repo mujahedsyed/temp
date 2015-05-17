@@ -1,7 +1,6 @@
 package com.machine;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import com.machine.entity.Coin;
 import com.machine.entity.Product;
@@ -19,10 +18,6 @@ import com.machine.states.SwitchedOffState;
  *
  */
 public class VendingMachine implements Machine {
-
-	@SuppressWarnings("unused")
-	private final static Logger LOGGER = Logger.getLogger(VendingMachine.class
-			.getName());
 
 	// Machine has a state
 	private State state;
@@ -52,7 +47,9 @@ public class VendingMachine implements Machine {
 		this.products = Products.getSingeltonInstance();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#getState()
 	 */
 	@Override
@@ -60,7 +57,9 @@ public class VendingMachine implements Machine {
 		return state;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#setState(com.machine.states.State)
 	 */
 	@Override
@@ -68,7 +67,9 @@ public class VendingMachine implements Machine {
 		this.state = state;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#ejectCoins()
 	 */
 	@Override
@@ -76,7 +77,9 @@ public class VendingMachine implements Machine {
 		this.state.ejectCoins();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#dispense()
 	 */
 	@Override
@@ -84,7 +87,9 @@ public class VendingMachine implements Machine {
 		this.state.dispense();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#getProduct()
 	 */
 	@Override
@@ -92,7 +97,9 @@ public class VendingMachine implements Machine {
 		return product;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#setProduct(com.machine.entity.Product)
 	 */
 	@Override
@@ -100,7 +107,9 @@ public class VendingMachine implements Machine {
 		this.product = product;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#getProducts()
 	 */
 	@Override
@@ -108,7 +117,9 @@ public class VendingMachine implements Machine {
 		return this.products;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#getCoins()
 	 */
 	@Override
@@ -116,7 +127,9 @@ public class VendingMachine implements Machine {
 		return coins;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#setCoins(java.util.List)
 	 */
 	@Override
@@ -124,7 +137,9 @@ public class VendingMachine implements Machine {
 		this.coins = coins;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#getIdleState()
 	 */
 	@Override
@@ -132,7 +147,9 @@ public class VendingMachine implements Machine {
 		return idleState;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#setIdleState(com.machine.states.State)
 	 */
 	@Override
@@ -140,7 +157,9 @@ public class VendingMachine implements Machine {
 		this.idleState = idleState;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#getInsertCoinsState()
 	 */
 	@Override
@@ -148,7 +167,9 @@ public class VendingMachine implements Machine {
 		return insertCoinsState;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#setInsertCoinsState(com.machine.states.State)
 	 */
 	@Override
@@ -156,7 +177,9 @@ public class VendingMachine implements Machine {
 		this.insertCoinsState = insertCoinsState;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#getSwitchedOffState()
 	 */
 	@Override
@@ -164,7 +187,9 @@ public class VendingMachine implements Machine {
 		return switchedOffState;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#setSwitchedOffState(com.machine.states.State)
 	 */
 	@Override
@@ -172,7 +197,9 @@ public class VendingMachine implements Machine {
 		this.switchedOffState = switchedOffState;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.machine.Machine#toString()
 	 */
 	@Override
