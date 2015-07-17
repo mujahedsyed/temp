@@ -23,7 +23,7 @@ public class Products {
 		return singeltonInstance;
 	}
 
-	// for demo - hardcoding the list of 8 products
+	// for demo ONLY - hardcoding the list of 8 products
 	static {
 		products.add(Product.A);
 		products.add(Product.B);

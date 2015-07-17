@@ -30,34 +30,34 @@ public class SwitchedOffState implements State {
 
 	@Override
 	public void switchedOn() {
-		LOGGER.warning("Machine is switching ON");
 		this.machine.setState(new InitialState(machine));
+		LOGGER.warning("ON");
 	}
 
 	@Override
 	public Product selectProduct() throws InvalidUserActionException {
-		throw new InvalidUserActionException("Machine is OFF!");
+		throw new InvalidUserActionException("Turn On");
 	}
 
 	@Override
 	public void cancelSelection() throws InvalidUserActionException {
-		throw new InvalidUserActionException("Machine is OFF!");
+		throw new InvalidUserActionException("Turn On");
 	}
 
 	@Override
 	public boolean enterAmountForSelectedProduct()
 			throws InvalidUserActionException, InvalidCoinException {
-		throw new InvalidUserActionException("Machine is OFF!");
+		throw new InvalidUserActionException("Turn On");
 	}
 
 	@Override
 	public Product dispense() throws InvalidUserActionException {
-		throw new InvalidUserActionException("Machine is OFF!");
+		throw new InvalidUserActionException("Turn On");
 	}
 
 	@Override
 	public List<Coin> ejectCoins() {
-		LOGGER.warning("Returning coins: Machine is OFF!");
+		LOGGER.warning("Return coins");
 		return this.machine.getCoins();
 	}
 }

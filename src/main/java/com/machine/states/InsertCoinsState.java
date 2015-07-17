@@ -51,13 +51,13 @@ public class InsertCoinsState implements State {
 
 	@Override
 	public void switchedOff() throws InvalidUserActionException {
-		LOGGER.warning("Machine is going to be switched off!");
 		this.machine.setState(new SwitchedOffState(machine));
+		LOGGER.warning("OFF");
 	}
 
 	@Override
 	public void switchedOn() throws InvalidUserActionException {
-		throw new InvalidUserActionException("Machine is already switched on!");
+		throw new InvalidUserActionException("ON");
 	}
 
 	@Override
@@ -130,8 +130,7 @@ public class InsertCoinsState implements State {
 
 	@Override
 	public Product dispense() throws InvalidUserActionException {
-		LOGGER.warning("Here is your selection " + this.machine.getProduct());
-		LOGGER.warning("Thank you for your custom");
+		LOGGER.warning("VEND ITEM :" + this.machine.getProduct());
 		// update the inventory
 		Products.getSingeltonInstance()
 				.removeProduct(this.machine.getProduct());
@@ -141,7 +140,7 @@ public class InsertCoinsState implements State {
 
 	@Override
 	public List<Coin> ejectCoins() {
-		LOGGER.warning("Returning coins: " + this.machine.getCoins());
+		LOGGER.warning("RETURN COINS: " + this.machine.getCoins());
 		return this.machine.getCoins();
 	}
 

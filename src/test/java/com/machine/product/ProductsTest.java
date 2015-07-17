@@ -41,6 +41,7 @@ public class ProductsTest {
 	@Test
 	public void testGetCurrentProducts() {
 		// test same as testRemoveProducts()
+		// skipping
 	}
 
 }

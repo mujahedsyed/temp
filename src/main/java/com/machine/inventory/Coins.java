@@ -20,7 +20,7 @@ public class Coins {
 		return singletonInstance;
 	}
 
-	// for demo - hardcoding some change - 13 coins with a value of £5.50
+	// for demo ONLY - hardcoding some change - 13 coins with a value of £5.50
 	static {
 		coins.add(Coin.FiftyPence);
 		coins.add(Coin.FiftyPence);
@@ -56,8 +56,7 @@ public class Coins {
 	public void removeCoinCollection(List<Coin> removecoins) {
 		for (Coin coin : removecoins) {
 			boolean wasAbleToRemove = coins.remove(coin);
-			LOGGER.info("was able to remove " + coin + " from the " + coins
-					+ ": " + wasAbleToRemove);
+			LOGGER.info(coin.toString());
 		}
 	}
 }
